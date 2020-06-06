@@ -90,7 +90,7 @@ void runServer(){
 
 
   server.on("/status", HTTP_GET, [] (AsyncWebServerRequest *request) {
-      request->send(200, "text/plain", "Temperature: "+value_temp+"*C"+"\nHumidity: "+value_hum+"%");
+      request->send(200, "text/plain", "Temperature: "+value_temp+"°C"+"\nHumidity: "+value_hum+"%");
 
   });
 
@@ -116,7 +116,7 @@ void OTAStart(){
 
 // Password can be set with it's md5 value as well
 // MD5(earthshield) 
- ArduinoOTA.setPasswordHash("a5214546592fc28db1dd03d694368cff");
+//ArduinoOTA.setPasswordHash("a5214546592fc28db1dd03d694368cff");
 
   ArduinoOTA
     .onStart([]() {

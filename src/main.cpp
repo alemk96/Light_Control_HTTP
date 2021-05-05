@@ -5,15 +5,15 @@
 #include <ESPmDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
-//parametri WiFi
-#define WLAN_SSID "TM Family"
-#define WLAN_PASS "MeddaFamily2?"
+//Wifi parameters
+#define WLAN_SSID "your_ssid"
+#define WLAN_PASS "Your_password"
 
 
-//n.b 13 e 14 invertiti
-#define GREEN   13
-#define RED    12
-#define BLUE  14
+
+#define GREEN //your green pin
+#define RED   //your red pin
+#define BLUE  //your blue pin
 
 
 
@@ -109,10 +109,10 @@ void OTAStart(){
 // ArduinoOTA.setPort(3232);
 
 // Hostname defaults to esp3232-[MAC]
- ArduinoOTA.setHostname("Letto");
+ ArduinoOTA.setHostname("SET_HOSTNAME");
 
 // No authentication by default
- ArduinoOTA.setPassword("earthshield");
+ ArduinoOTA.setPassword("SET_PASSOWORD");
 
 // Password can be set with it's md5 value as well
 // MD5(earthshield) 
@@ -146,15 +146,15 @@ void OTAStart(){
 
   ArduinoOTA.begin();
 }
-//WIFI
+//WIFI 
 void wiFiStart(){
-  //inizializza la connessione
+  
     WiFi.mode(WIFI_STA);
     WiFi.begin(WLAN_SSID,WLAN_PASS);
     Serial.println();
     Serial.print("Waiting for WiFi...");
 
-    //Verifica della connessione
+    
     while (WiFi.status() != WL_CONNECTED) {
         Serial.print(".");
         delay(500);
@@ -171,15 +171,12 @@ void setup() {
   ledcAttachPin(RED,2);
   ledcAttachPin(BLUE,3);
 
-  //inizializzo i canali con ledcSetup(channel, frequency, resolution)
+  
   ledcSetup(1,12000 ,8);
   ledcSetup(2,12000 ,8);
   ledcSetup(3,12000 ,8);
 
-  /*azzero tutti i canali
-  ledcWrite(1, 0);
-  ledcWrite(2, 0);
-  ledcWrite(3, 0);*/
+  
   wiFiStart();
   OTAStart();
   runServer();
